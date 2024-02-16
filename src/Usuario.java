@@ -3,8 +3,8 @@ import java.util.Date;
 
 
 public class Usuario {
-    String nombre, apellido, contra, sexo, departamento, identidad;
-    Date fechaNacimiento;
+     protected String nombre, apellido, contra, sexo, departamento, identidad;
+   protected Date fechaNacimiento;
 
     public Usuario() {
     }

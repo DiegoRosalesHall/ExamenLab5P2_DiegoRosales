@@ -1,5 +1,7 @@
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 
@@ -7,14 +9,24 @@ import javax.swing.JOptionPane;
 
 public class login extends javax.swing.JFrame {
 // Usuarios
-    Usuario u1 = new Usuario("Diego Gerardo","Rosales Hall","diego1234");
-    Usuario u2 = new Usuario("Josue Roberto","Rivera","josue1234");
+    Date d1 = new Date(3905,7,23); // fecha de josue
+    Date d2 = new Date(3905,6,23); // fecha de diego
+    Date d3 = new Date(3906,8,25); // fecha de luis
+    Date d4 = new Date(3906,2,22); //fecha de Belen
+    
+    Usuario u2 = new Empleados ("Josue Roberto","Rivera","josue1234","Masculino","Tegucigalpa"," ",d1);
+    Usuario u3 = new Civiles("Luis Fernando","Castro Soto","luis1234","Masculino","Tegucigalpa"," ",d3);
+    Usuario u4 = new Empleados ("Maria Belen","Padilla Canelo","belen1234","Femenino","La Ceiba"," ",d4);
+    Usuario u1 = new Civiles ("Diego Gerardo","Rosales Hall","diego1234","Masculino","San Pedero Sula"," ",d2);
     ArrayList<Usuario> usuarios = new ArrayList<>();
-   
+    public static int posUss=0;
+    
     public login() {
-        int posUss=0;
+        
         usuarios.add(u1);
         usuarios.add(u2);
+        usuarios.add(u3);
+        usuarios.add(u4);
         initComponents();
     }
 
@@ -52,8 +64,16 @@ public class login extends javax.swing.JFrame {
 
         loginButton.setBackground(new java.awt.Color(0, 204, 204));
         loginButton.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        loginButton.setForeground(new java.awt.Color(0, 0, 0));
+        loginButton.setForeground(new java.awt.Color(255, 255, 255));
         loginButton.setText("Iniciar Sesion");
+        loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                loginButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                loginButtonMouseExited(evt);
+            }
+        });
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
@@ -61,6 +81,17 @@ public class login extends javax.swing.JFrame {
         });
 
         exitButton.setBackground(new java.awt.Color(255, 255, 255));
+        exitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                exitButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitButtonMouseExited(evt);
+            }
+        });
 
         labelX.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         labelX.setForeground(new java.awt.Color(0, 0, 0));
@@ -82,10 +113,15 @@ public class login extends javax.swing.JFrame {
         );
 
         passwordFieldcontrasena.setBackground(new java.awt.Color(204, 204, 204));
-        passwordFieldcontrasena.setText("jPasswordField1");
+        passwordFieldcontrasena.setText("********");
 
         textfieldNombre.setBackground(new java.awt.Color(204, 204, 204));
         textfieldNombre.setText("Ingrese un usuario");
+        textfieldNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                textfieldNombreMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -150,40 +186,68 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        int contvalidez=0;
-        int posicion = 0;
-      
-         for (int i = 0; i < usuarios.size(); i++) {
-             String prueba = usuarios.get(i).getNombre()+" "+usuarios.get(i).getApellido();
-             JOptionPane.showMessageDialog(rootPane, prueba);
-            if(textfieldNombre.getText().equals(prueba)){
-            contvalidez++;
-                if(passwordFieldcontrasena.getText().equals(usuarios.get(i).getContra())){
+        int contvalidez = 0;
+        
+
+        for (int i = 0; i < usuarios.size(); i++) {
+            String prueba = usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellido();
+            JOptionPane.showMessageDialog(rootPane, prueba);
+            if (textfieldNombre.getText().equals(prueba)) {
+                contvalidez++;
+                if (passwordFieldcontrasena.getText().equals(usuarios.get(i).getContra())) {
                     JOptionPane.showMessageDialog(rootPane, usuarios.get(i).getContra());
                     contvalidez++;
-                    
-               
-        }
-            
-        }
-            
-            if(contvalidez==2){
+                    posUss=i;
+                }
+
+            }
+
+            if (contvalidez == 2) {
                 break;
+            } else {
+                contvalidez = 0;
             }
-            else{
-                contvalidez=0;
-            }
-        
-          
-         }         
+
+        }      
          
          if(contvalidez==2){
              JOptionPane.showMessageDialog(rootPane, "Has iniciado sesion con exito");
+             passwordFieldcontrasena.setText("");
+             textfieldNombre.setText("");
          }
          else{
              JOptionPane.showMessageDialog(rootPane, "Usuario Invalido");
          }
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void textfieldNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfieldNombreMousePressed
+       
+       
+    }//GEN-LAST:event_textfieldNombreMousePressed
+
+    private void exitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseClicked
+       System.exit(0);
+    }//GEN-LAST:event_exitButtonMouseClicked
+
+    private void exitButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseEntered
+        exitButton.setBackground(Color.red);
+        labelX.setForeground(Color.white);
+    }//GEN-LAST:event_exitButtonMouseEntered
+
+    private void exitButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseExited
+        exitButton.setBackground(Color.white);
+        labelX.setForeground(Color.black);
+    }//GEN-LAST:event_exitButtonMouseExited
+
+    private void loginButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseEntered
+       loginButton.setBackground(Color.white);
+       loginButton.setForeground(new Color(0,204,204));
+    }//GEN-LAST:event_loginButtonMouseEntered
+
+    private void loginButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseExited
+        loginButton.setBackground(new Color(0,204,204));
+        loginButton.setForeground(Color.white);
+    }//GEN-LAST:event_loginButtonMouseExited
 
    
     public static void main(String args[]) {

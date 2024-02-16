@@ -10,12 +10,10 @@ public class Empleados extends Usuario{
         this.puestoLaboral = puestoLaboral;
         this.tiempotrabajo = tiempotrabajo;
     }
-
-    public Empleados(String carrera, String puestoLaboral, String tiempotrabajo, String nombre, String apellido, String contra, String sexo, String departamento, String identidad, Date fechaNacimiento) {
+    
+    public Empleados(String nombre, String apellido, String contra, String sexo, String departamento, String identidad, Date fechaNacimiento) {
         super(nombre, apellido, contra, sexo, departamento, identidad, fechaNacimiento);
-        this.carrera = carrera;
-        this.puestoLaboral = puestoLaboral;
-        this.tiempotrabajo = tiempotrabajo;
+        
     }
 
     public Empleados() {
