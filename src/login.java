@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 
@@ -33,10 +34,6 @@ public class login extends javax.swing.JFrame {
             
         }
         
-        JOptionPane.showMessageDialog(rootPane, usuarios.get(0).getIdentidad());
-        JOptionPane.showMessageDialog(rootPane, usuarios.get(3).getIdentidad());
-        JOptionPane.showMessageDialog(rootPane, usuarios.get(2).getIdentidad());
-        
         initComponents();
     }
 
@@ -53,7 +50,7 @@ public class login extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        comboBoxIdentidad = new javax.swing.JComboBox<>();
+        comboBoxidentidad = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -69,6 +66,7 @@ public class login extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         civilesDialog = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -108,10 +106,9 @@ public class login extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(204, 204, 204));
         jPanel5.setForeground(new java.awt.Color(0, 0, 0));
 
-        comboBoxIdentidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboBoxIdentidad.addActionListener(new java.awt.event.ActionListener() {
+        comboBoxidentidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxIdentidadActionPerformed(evt);
+                comboBoxidentidadActionPerformed(evt);
             }
         });
 
@@ -154,7 +151,7 @@ public class login extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboBoxIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBoxidentidad, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -188,7 +185,7 @@ public class login extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(comboBoxIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboBoxidentidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -293,6 +290,8 @@ public class login extends javax.swing.JFrame {
             civilesDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -470,6 +469,8 @@ public class login extends javax.swing.JFrame {
              if(usuarios.get(posUss) instanceof Empleados){
                  this.setVisible(false);
                  empleadosDialog.setVisible(true);
+                 comboBoxidentidad.addItem(usuarios.get(0).getIdentidad());
+                comboBoxidentidad.addItem(usuarios.get(2).getIdentidad());
                  empleadosDialog.pack();
                 labelshownameempleado.setText(usuarios.get(posUss).getNombre());
              }
@@ -514,9 +515,9 @@ public class login extends javax.swing.JFrame {
         loginButton.setForeground(Color.white);
     }//GEN-LAST:event_loginButtonMouseExited
 
-    private void comboBoxIdentidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxIdentidadActionPerformed
+    private void comboBoxidentidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxidentidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxIdentidadActionPerformed
+    }//GEN-LAST:event_comboBoxidentidadActionPerformed
 
    
     public static void main(String args[]) {
@@ -606,7 +607,7 @@ public class login extends javax.swing.JFrame {
            
        }
        
-       else if( uss.getDepartamento().equals("Comayagua")){
+       else {
            identidad+="03";
            int municipionum = rand.nextInt(1,21);
            String caso1="";
@@ -631,7 +632,7 @@ public class login extends javax.swing.JFrame {
            return identidad;
            
        }
-       return null;
+       
        }
 
         
@@ -640,10 +641,11 @@ public class login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog civilesDialog;
-    private javax.swing.JComboBox<String> comboBoxIdentidad;
+    private javax.swing.JComboBox<String> comboBoxidentidad;
     private javax.swing.JDialog empleadosDialog;
     private javax.swing.JPanel exitButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

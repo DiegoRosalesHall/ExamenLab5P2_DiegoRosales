@@ -18,5 +18,10 @@ public class Civiles extends Usuario{
     public Civiles(String nombre, String apellido, String contra) {
         super(nombre, apellido, contra);
     }
+
+    @Override
+    public String toString() {
+        return super.identidad;
+    }
     
 }
