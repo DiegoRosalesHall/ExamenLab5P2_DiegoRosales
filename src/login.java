@@ -35,6 +35,11 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        empleadosDialog = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        civilesDialog = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -44,6 +49,62 @@ public class login extends javax.swing.JFrame {
         labelX = new javax.swing.JLabel();
         passwordFieldcontrasena = new javax.swing.JPasswordField();
         textfieldNombre = new javax.swing.JTextField();
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel4.setText("empleados");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(382, 382, 382)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(329, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jLabel4)
+                .addContainerGap(541, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout empleadosDialogLayout = new javax.swing.GroupLayout(empleadosDialog.getContentPane());
+        empleadosDialog.getContentPane().setLayout(empleadosDialogLayout);
+        empleadosDialogLayout.setHorizontalGroup(
+            empleadosDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        empleadosDialogLayout.setVerticalGroup(
+            empleadosDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel3.setBackground(new java.awt.Color(255, 51, 51));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout civilesDialogLayout = new javax.swing.GroupLayout(civilesDialog.getContentPane());
+        civilesDialog.getContentPane().setLayout(civilesDialogLayout);
+        civilesDialogLayout.setHorizontalGroup(
+            civilesDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        civilesDialogLayout.setVerticalGroup(
+            civilesDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -207,6 +268,8 @@ public class login extends javax.swing.JFrame {
             } else {
                 contvalidez = 0;
             }
+            
+            
 
         }      
          
@@ -214,6 +277,18 @@ public class login extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(rootPane, "Has iniciado sesion con exito");
              passwordFieldcontrasena.setText("");
              textfieldNombre.setText("");
+             
+             if(usuarios.get(posUss) instanceof Empleados){
+                 this.setVisible(false);
+                 empleadosDialog.setVisible(true);
+                 empleadosDialog.pack();
+             }
+             else {
+             this.setVisible(false);
+             civilesDialog.setVisible(true);
+             civilesDialog.pack();
+         }
+             
          }
          else{
              JOptionPane.showMessageDialog(rootPane, "Usuario Invalido");
@@ -283,11 +358,16 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog civilesDialog;
+    private javax.swing.JDialog empleadosDialog;
     private javax.swing.JPanel exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel labelX;
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordFieldcontrasena;
