@@ -48,21 +48,20 @@ public class login extends javax.swing.JFrame {
     
     public void LlenarTablatramites(){
         DefaultTableModel tablemodel = (DefaultTableModel) tablatramites.getModel();
-
         for (int i = 0; i < usuarios.size(); i++) {
             if(usuarios.get(i)instanceof Civiles){
-                
-                for (int j = 0; j <((Civiles)usuarios.get(i)).getTramites().size() ; j++) {
-                   Object [] modelotabla = {((Civiles)usuarios.get(i)).getTramites().get(i).getNombre(),((Civiles)usuarios.get(i)).getTramites().get(i).getDescripcion(),((Civiles)usuarios.get(i)).getTramites().get(i).getFechaSolicitud(),((Civiles)usuarios.get(i)).getTramites().get(i).getIdentidad()};
-                tablemodel.addRow(modelotabla); 
+                for (int j = 0; j < ((Civiles)usuarios.get(i)).getTramites().size(); j++) {
+                    Object [] modelotabla = {((Civiles)usuarios.get(i)).getTramites().get(j).getNombre(),((Civiles)usuarios.get(i)).getTramites().get(j).getDescripcion(),((Civiles)usuarios.get(i)).getTramites().get(j).getFechaSolicitud(),((Civiles)usuarios.get(i)).getTramites().get(j).getIdentidad()};
+                    tablemodel.addRow(modelotabla);
                 }
-            
             }
-            else{
-                
-            }
-        
         }
+        tablatramites.setModel(tablemodel);
+    }
+    
+       public void VaciarTablatramites(){
+        DefaultTableModel tablemodel = (DefaultTableModel) tablatramites.getModel();
+        tablemodel.setRowCount(0);
         tablatramites.setModel(tablemodel);
     }
     
@@ -77,10 +76,16 @@ public class login extends javax.swing.JFrame {
      public void VaciarTablaPersonal(){
         DefaultTableModel tablemodel = (DefaultTableModel) tablainformacionpersonal.getModel();
         tablemodel.setRowCount(0);
+        tablainformacionpersonal.setModel(tablemodel);
     }
      
     public void LlenarTablatramitesciviles(){
         DefaultTableModel tablemodel = (DefaultTableModel) tablatramitesciviles.getModel();
+        for (int i = 0; i < ((Civiles)usuarios.get(posUss)).getTramites().size() ; i++) {
+            Object [] modelotabla ={((Civiles)usuarios.get(posUss)).getTramites().get(i).getNombre(), ((Civiles)usuarios.get(posUss)).getTramites().get(i).getDescripcion(),((Civiles)usuarios.get(posUss)).getTramites().get(i).getFechaSolicitud(),((Civiles)usuarios.get(posUss)).getTramites().get(i).getIdentidad()};
+                     tablemodel.addRow(modelotabla);   
+        }
+       /* 
         for (int i = 0; i <usuarios.size() ; i++) {
             if(usuarios.get(i) instanceof Civiles){
                 for (int j = 0; j <((Civiles)usuarios.get(i)).getTramites().size() ; j++) {
@@ -92,6 +97,7 @@ public class login extends javax.swing.JFrame {
         }
         
         
+        */
         tablatramitesciviles.setModel(tablemodel);
     }
     public void VaciarTablatramitesciviles(){
@@ -151,7 +157,7 @@ public class login extends javax.swing.JFrame {
         civilesDialog = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        labelshownameempleado1 = new javax.swing.JLabel();
+        labelshownameciviles = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
@@ -179,6 +185,7 @@ public class login extends javax.swing.JFrame {
         labelX = new javax.swing.JLabel();
         passwordFieldcontrasena = new javax.swing.JPasswordField();
         textfieldNombre = new javax.swing.JTextField();
+        buttonverUsuarios = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -465,8 +472,8 @@ public class login extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Civiles");
 
-        labelshownameempleado1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        labelshownameempleado1.setForeground(new java.awt.Color(0, 0, 0));
+        labelshownameciviles.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        labelshownameciviles.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 0, 0));
@@ -639,7 +646,7 @@ public class login extends javax.swing.JFrame {
                         .addGap(173, 173, 173)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelshownameempleado1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(labelshownameciviles, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -662,7 +669,7 @@ public class login extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel15)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(labelshownameempleado1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelshownameciviles, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)))
                 .addGap(26, 26, 26)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -760,6 +767,24 @@ public class login extends javax.swing.JFrame {
             }
         });
 
+        buttonverUsuarios.setBackground(new java.awt.Color(0, 204, 204));
+        buttonverUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        buttonverUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        buttonverUsuarios.setText("Ver Usuarios");
+        buttonverUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonverUsuariosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonverUsuariosMouseExited(evt);
+            }
+        });
+        buttonverUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonverUsuariosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -772,20 +797,24 @@ public class login extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
+                        .addGap(108, 108, 108)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(passwordFieldcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(textfieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(textfieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(passwordFieldcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(219, 219, 219)
                         .addComponent(loginButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(buttonverUsuarios)
+                .addGap(14, 14, 14))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -805,7 +834,9 @@ public class login extends javax.swing.JFrame {
                     .addComponent(passwordFieldcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(106, 106, 106)
                 .addComponent(loginButton)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addComponent(buttonverUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -883,6 +914,7 @@ public class login extends javax.swing.JFrame {
              this.setVisible(false);
              civilesDialog.setVisible(true);
              civilesDialog.pack();
+             labelshownameciviles.setText(usuarios.get(posUss).getNombre());
          }
              
              
@@ -955,9 +987,10 @@ public class login extends javax.swing.JFrame {
          comboBoxidentidad.addItem(usuarios.get(2).getIdentidad());
                 comboboxSexo.removeAllItems();
                  comboboxDepartamento.removeAllItems();
-                 comboBoxidentidad.removeAll();
-                 comboBoxidentidad.addItem(usuarios.get(0).getIdentidad());
-                comboBoxidentidad.addItem(usuarios.get(2).getIdentidad());
+                 comboBoxidentidad.removeAllItems();
+                VaciarTablaciviles();
+                VaciarTablatramites();
+                
         
     }//GEN-LAST:event_signoutbuttonActionPerformed
 
@@ -972,20 +1005,15 @@ public class login extends javax.swing.JFrame {
             usuarios.get(0).setContra(textfieldcontramod.getText());
             usuarios.get(0).setApellido(textfieldapellidosmod.getText());
             usuarios.get(0).setFechaNacimiento(calendarmod.getDate());
-            
-            String identt = comboboxDepartamento.getSelectedItem().toString();
-            if(usuarios.get(0).getDepartamento().equals(identt)){
-                usuarios.get(0).setDepartamento(comboboxDepartamento.getSelectedItem().toString());
-            usuarios.get(0).setSexo(comboboxSexo.getSelectedItem().toString());
-            }
-            else if(!usuarios.get(0).getDepartamento().equals(identt)){
-                 usuarios.get(0).setDepartamento(identt);
-            identidad(usuarios.get(0));
             usuarios.get(0).setDepartamento(comboboxDepartamento.getSelectedItem().toString());
             usuarios.get(0).setSexo(comboboxSexo.getSelectedItem().toString());
-           
-            }
-           
+
+            
+            
+            
+            comboBoxidentidad.removeAllItems();
+            comboBoxidentidad.addItem(usuarios.get(0).getIdentidad());
+            comboBoxidentidad.addItem(usuarios.get(2).getIdentidad());
             
             
             
@@ -1032,6 +1060,24 @@ public class login extends javax.swing.JFrame {
         civilesDialog.setVisible(false);
         this.setVisible(true);
     }//GEN-LAST:event_signoutbuttoncivilesActionPerformed
+
+    private void buttonverUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonverUsuariosActionPerformed
+        String cad ="";
+        for (int i = 0; i < usuarios.size(); i++) {
+            cad+="Nombre Completo: "+ usuarios.get(i).getNombre()+" "+usuarios.get(i).getApellido()+" \nContraseña: "+usuarios.get(i).getContra()+"\n";
+        }
+        JOptionPane.showMessageDialog(rootPane, cad);
+    }//GEN-LAST:event_buttonverUsuariosActionPerformed
+
+    private void buttonverUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonverUsuariosMouseEntered
+       buttonverUsuarios.setBackground(Color.white);
+       buttonverUsuarios.setForeground(new Color(0,204,204));
+    }//GEN-LAST:event_buttonverUsuariosMouseEntered
+
+    private void buttonverUsuariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonverUsuariosMouseExited
+       buttonverUsuarios.setBackground(new Color(0,204,204));
+       buttonverUsuarios.setForeground(Color.white);
+    }//GEN-LAST:event_buttonverUsuariosMouseExited
 
    
     public static void main(String args[]) {
@@ -1156,6 +1202,7 @@ public class login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonModificar;
     private javax.swing.JButton buttontramite;
+    private javax.swing.JButton buttonverUsuarios;
     private com.toedter.calendar.JCalendar calendarmod;
     private javax.swing.JDialog civilesDialog;
     private javax.swing.JComboBox<String> comboBoxidentidad;
@@ -1198,8 +1245,8 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel labelX;
+    private javax.swing.JLabel labelshownameciviles;
     private javax.swing.JLabel labelshownameempleado;
-    private javax.swing.JLabel labelshownameempleado1;
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordFieldcontrasena;
     private javax.swing.JButton signoutbutton;
