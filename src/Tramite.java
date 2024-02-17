@@ -11,6 +11,7 @@ Date fechaSolicitud;
         this.identidad = identidad;
         this.fechaSolicitud = fechaSolicitud;
     }
+    
 
     public Tramite() {
     }

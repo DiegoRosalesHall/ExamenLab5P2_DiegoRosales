@@ -22,6 +22,16 @@ public class Civiles extends Usuario{
     @Override
     public String toString() {
         return super.identidad;
+        
+        
+    }
+
+    public ArrayList<Tramite> getTramites() {
+        return tramites;
+    }
+
+    public void setTramites(ArrayList<Tramite> tramites) {
+        this.tramites = tramites;
     }
     
 }
