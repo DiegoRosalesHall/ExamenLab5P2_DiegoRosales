@@ -36,19 +36,68 @@ public class login extends javax.swing.JFrame {
         }
             
         }
+        
+         tablainfociviles.setModel(tablemodel);
+    }
+    
+    public void VaciarTablaciviles(){
+        DefaultTableModel tablemodel = (DefaultTableModel) tablainfociviles.getModel();
+        tablemodel.setRowCount(0);
          tablainfociviles.setModel(tablemodel);
     }
     
     public void LlenarTablatramites(){
         DefaultTableModel tablemodel = (DefaultTableModel) tablatramites.getModel();
+
         for (int i = 0; i < usuarios.size(); i++) {
+            if(usuarios.get(i)instanceof Civiles){
+                
+                for (int j = 0; j <((Civiles)usuarios.get(i)).getTramites().size() ; j++) {
+                   Object [] modelotabla = {((Civiles)usuarios.get(i)).getTramites().get(i).getNombre(),((Civiles)usuarios.get(i)).getTramites().get(i).getDescripcion(),((Civiles)usuarios.get(i)).getTramites().get(i).getFechaSolicitud(),((Civiles)usuarios.get(i)).getTramites().get(i).getIdentidad()};
+                tablemodel.addRow(modelotabla); 
+                }
             
-            Object [] modelotabla = {((Civiles)usuarios.get(i)).getTramites().get(i).getNombre(),((Civiles)usuarios.get(i)).getTramites().get(i).getDescripcion(),((Civiles)usuarios.get(i)).getTramites().get(i).getFechaSolicitud(),((Civiles)usuarios.get(i)).getTramites().get(i).getIdentidad()};
-            tablemodel.addRow(modelotabla);
-            
+            }
+            else{
+                
+            }
         
         }
         tablatramites.setModel(tablemodel);
+    }
+    
+    public void LlenarTablaPersonal(){
+        DefaultTableModel tablemodel = (DefaultTableModel) tablainformacionpersonal.getModel();
+        Object [] modelotabla ={ usuarios.get(posUss).getNombre()+" "+usuarios.get(posUss).getApellido(), usuarios.get(posUss).getIdentidad(),usuarios.get(posUss).getFechaNacimiento()};
+        tablemodel.addRow(modelotabla);
+        
+        tablainformacionpersonal.setModel(tablemodel);
+    }
+    
+     public void VaciarTablaPersonal(){
+        DefaultTableModel tablemodel = (DefaultTableModel) tablainformacionpersonal.getModel();
+        tablemodel.setRowCount(0);
+    }
+     
+    public void LlenarTablatramitesciviles(){
+        DefaultTableModel tablemodel = (DefaultTableModel) tablatramitesciviles.getModel();
+        for (int i = 0; i <usuarios.size() ; i++) {
+            if(usuarios.get(i) instanceof Civiles){
+                for (int j = 0; j <((Civiles)usuarios.get(i)).getTramites().size() ; j++) {
+                    Object [] modelotabla ={((Civiles)usuarios.get(posUss)).getTramites().get(j).getNombre(), ((Civiles)usuarios.get(posUss)).getTramites().get(j).getDescripcion(),((Civiles)usuarios.get(posUss)).getTramites().get(j).getFechaSolicitud(),((Civiles)usuarios.get(posUss)).getTramites().get(j).getIdentidad()};
+                     tablemodel.addRow(modelotabla);   
+                }
+             
+            }
+        }
+        
+        
+        tablatramitesciviles.setModel(tablemodel);
+    }
+    public void VaciarTablatramitesciviles(){
+        DefaultTableModel tablemodel = (DefaultTableModel) tablatramitesciviles.getModel();
+        tablemodel.setRowCount(0);
+        tablatramitesciviles.setModel(tablemodel);
     }
     
     public login() {
@@ -106,6 +155,12 @@ public class login extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tablatramitesciviles = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tablainformacionpersonal = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         textfieldnombretramite = new javax.swing.JTextField();
@@ -419,15 +474,75 @@ public class login extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
 
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel18.setText("Informacion Personal");
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel19.setText("Tramites");
+
+        tablatramitesciviles.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre Tramite", "Descripcion", "Fecha", "No. Identidad"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tablatramitesciviles);
+
+        tablainformacionpersonal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre Completo", "No. Identidad", "Fecha de Nacimiento"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(tablainformacionpersonal);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(56, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Informacion Personal", jPanel6);
@@ -713,11 +828,11 @@ public class login extends javax.swing.JFrame {
 
         for (int i = 0; i < usuarios.size(); i++) {
             String prueba = usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellido();
-            JOptionPane.showMessageDialog(rootPane, prueba);
+            
             if (textfieldNombre.getText().equals(prueba)) {
                 contvalidez++;
                 if (passwordFieldcontrasena.getText().equals(usuarios.get(i).getContra())) {
-                    JOptionPane.showMessageDialog(rootPane, usuarios.get(i).getContra());
+                    
                     contvalidez++;
                     posUss=i;
                 }
@@ -758,7 +873,13 @@ public class login extends javax.swing.JFrame {
                 
              }
              else {
-                 
+                 VaciarTablaPersonal();
+                 VaciarTablatramitesciviles();
+             LlenarTablaPersonal();
+             
+            
+             LlenarTablatramitesciviles();
+             
              this.setVisible(false);
              civilesDialog.setVisible(true);
              civilesDialog.pack();
@@ -831,6 +952,12 @@ public class login extends javax.swing.JFrame {
     private void signoutbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoutbuttonActionPerformed
         empleadosDialog.setVisible(false);
         this.setVisible(true);
+         comboBoxidentidad.addItem(usuarios.get(2).getIdentidad());
+                comboboxSexo.removeAllItems();
+                 comboboxDepartamento.removeAllItems();
+                 comboBoxidentidad.removeAll();
+                 comboBoxidentidad.addItem(usuarios.get(0).getIdentidad());
+                comboBoxidentidad.addItem(usuarios.get(2).getIdentidad());
         
     }//GEN-LAST:event_signoutbuttonActionPerformed
 
@@ -845,9 +972,21 @@ public class login extends javax.swing.JFrame {
             usuarios.get(0).setContra(textfieldcontramod.getText());
             usuarios.get(0).setApellido(textfieldapellidosmod.getText());
             usuarios.get(0).setFechaNacimiento(calendarmod.getDate());
+            
+            String identt = comboboxDepartamento.getSelectedItem().toString();
+            if(usuarios.get(0).getDepartamento().equals(identt)){
+                usuarios.get(0).setDepartamento(comboboxDepartamento.getSelectedItem().toString());
+            usuarios.get(0).setSexo(comboboxSexo.getSelectedItem().toString());
+            }
+            else if(!usuarios.get(0).getDepartamento().equals(identt)){
+                 usuarios.get(0).setDepartamento(identt);
+            identidad(usuarios.get(0));
             usuarios.get(0).setDepartamento(comboboxDepartamento.getSelectedItem().toString());
             usuarios.get(0).setSexo(comboboxSexo.getSelectedItem().toString());
            
+            }
+           
+            
             
             
             
@@ -867,11 +1006,16 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonModificarActionPerformed
 
     private void buttontramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttontramiteActionPerformed
+        JOptionPane.showMessageDialog(rootPane, "Has hecho el tramite con exito!");
         Date da = new Date();
         Tramite tramite = new Tramite(textfieldnombretramite.getText(),textareadescripciontramite.getText(),usuarios.get(posUss).getIdentidad(),da);
         ((Civiles)usuarios.get(posUss)).getTramites().add(tramite);
         textfieldnombretramite.setText("");
         textareadescripciontramite.setText("");
+        VaciarTablatramitesciviles();
+        VaciarTablaPersonal();
+        LlenarTablaPersonal();
+        LlenarTablatramitesciviles();
     }//GEN-LAST:event_buttontramiteActionPerformed
 
     private void signoutbuttoncivilesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signoutbuttoncivilesMouseEntered
@@ -1029,6 +1173,8 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1047,6 +1193,8 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel labelX;
@@ -1057,7 +1205,9 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JButton signoutbutton;
     private javax.swing.JButton signoutbuttonciviles;
     private javax.swing.JTable tablainfociviles;
+    private javax.swing.JTable tablainformacionpersonal;
     private javax.swing.JTable tablatramites;
+    private javax.swing.JTable tablatramitesciviles;
     private javax.swing.JTextArea textareadescripciontramite;
     private javax.swing.JTextField textfieldNombre;
     private javax.swing.JTextField textfieldNombremod;
